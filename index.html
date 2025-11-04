@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Shubham K. Sawant | DevSecOps & Cloud Engineer</title>
+    <meta name="description" content="Shubham K. Sawant - DevSecOps & Cloud Engineer. Expertise in AWS, Terraform, Kubernetes, CI/CD, and AI-driven DevOps automation." />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --secondary: #0EA5E9;
+            --accent: #8B5CF6;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --dark: #0A0E27;
+            --darker: #050816;
+            --card: #1A1F3A;
+            --text: #E2E8F0;
+            --text-dim: #94A3B8;
+            --glow: rgba(0, 217, 255, 0.5);
+        }
+
+        body.light-mode {
+            --dark: #D8DADC;
+            --darker: #E5E7EB;
+            --card: #ECEEF0;
+            --text: #374151;
+            --text-dim: #6B7280;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Background pattern */
+        body::before {
+            content: '';
+            position: fixed; inset:0;
+            background:
+                linear-gradient(90deg, rgba(0,217,255,0.02) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(0,217,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed; top: 0; width: 100%;
+            background: rgba(10,14,39,0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid rgba(0,217,255,0.2);
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,217,255,0.1);
+        }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+        .nav-logo { font-family:'Orbitron', sans-serif; font-size:1.8rem; font-weight:900; background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:2px; }
+        .nav-logo i { color:var(--primary); margin-right:0.5rem; animation:pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+        .nav-menu { display:flex; list-style:none; gap:2.5rem; }
+        .nav-link { font-family:'JetBrains Mono', monospace; color:var(--text-dim); text-decoration:none; font-weight:600; font-size:0.95rem; position:relative; text-transform:uppercase; letter-spacing:1px; }
+        .nav-link::before { content:'>'; margin-right:0.5rem; color:var(--primary); opacity:0; transition:all 0.3s; }
+        .nav-link:hover::before { opacity:1; }
+        .nav-link::after { content:''; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:linear-gradient(90deg,var(--primary),var(--accent)); box-shadow:0 0 10px var(--glow); transition:width 0.3s; }
+        .nav-link:hover{ color:var(--primary); } .nav-link:hover::after{ width:100%; }
+
+        /* Hero */
+        .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; background:
+            radial-gradient(circle at 20% 50%, rgba(0,217,255,0.08) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 50%),
+            linear-gradient(135deg,var(--darker) 0%, var(--dark) 100%);
+            position:relative; overflow:hidden; padding: 6rem 1rem 4rem 1rem;
+        }
+        .hero-content { z-index:1; text-align:center; max-width:1100px; margin:auto; padding:2rem; }
+        .hero-greeting { font-family:'JetBrains Mono', monospace; color:var(--primary); font-size:1.2rem; font-weight:700; margin-bottom:1rem; text-transform:uppercase; letter-spacing:4px; }
+        .hero-name { font-family:'Orbitron', sans-serif; font-size:4rem; font-weight:900; background:linear-gradient(135deg,#FFF 0%, var(--primary) 30%, var(--accent) 60%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:0.5rem; text-shadow:0 0 40px var(--glow); }
+        .hero-title { font-family:'JetBrains Mono', monospace; font-size:1.2rem; color:var(--text); margin-bottom:1.5rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; }
+        .terminal-line { font-family:'JetBrains Mono', monospace; background: rgba(0,217,255,0.03); border-left:4px solid var(--primary); padding:1rem 1.5rem; margin:1.5rem auto; max-width:700px; text-align:left; border-radius:0 8px 8px 0; }
+        .hero-cta { display:flex; gap:1rem; justify-content:center; margin-top:1.5rem; flex-wrap:wrap; }
+        .btn { font-family:'JetBrains Mono', monospace; padding:0.9rem 1.6rem; border-radius:8px; font-weight:700; font-size:0.95rem; text-decoration:none; text-transform:uppercase; letter-spacing:1px; border:2px solid var(--primary); cursor:pointer; }
+        .btn-primary { background:linear-gradient(135deg,var(--primary),var(--secondary)); color:var(--dark); box-shadow:0 0 30px var(--glow); border-color:transparent; }
+        .btn-secondary { background:transparent; color:var(--primary); border-color:rgba(0,217,255,0.2); }
+        .hero-social { display:flex; gap:1rem; justify-content:center; margin-top:1.5rem; }
+
+        /* Sections */
+        section { padding:6rem 0; position:relative; }
+        .container { max-width:1200px; margin:0 auto; padding:0 1.5rem; position:relative; z-index:1; }
+        .section-title { font-family:'Orbitron', sans-serif; font-size:2.2rem; font-weight:900; text-align:center; margin-bottom:1rem; background:linear-gradient(135deg,var(--primary),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-transform:uppercase; letter-spacing:2px; }
+        .section-subtitle { font-family:'JetBrains Mono', monospace; text-align:center; color:var(--text-dim); font-size:1rem; margin-bottom:2rem; max-width:900px; margin-left:auto; margin-right:auto; }
+
+        /* Portfolio grid */
+        .portfolio-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:2rem; }
+        .project-card { background:var(--card); border-radius:12px; padding:1.2rem; border:2px solid rgba(0,217,255,0.08); transition:all 0.35s; overflow:hidden; }
+        .project-card:hover { transform:translateY(-8px); box-shadow:0 10px 40px rgba(0,217,255,0.12); }
+        .project-title { font-family:'Orbitron', sans-serif; color:var(--primary); font-weight:800; font-size:1.05rem; margin-bottom:0.6rem; }
+
+        .tag { font-family:'JetBrains Mono'; background: rgba(0,217,255,0.06); color:var(--primary); padding:0.4rem 0.8rem; border-radius:6px; font-size:0.8rem; font-weight:700; border:1px solid rgba(0,217,255,0.08); margin-right:0.4rem; display:inline-block; margin-bottom:0.4rem; }
+
+        /* Skills */
+        .skills-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; }
+
+        .skill-category { background:var(--card); padding:1.2rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); }
+
+        /* Timeline */
+        .timeline { position:relative; max-width:900px; margin:0 auto; }
+        .timeline-item { background:var(--card); padding:1.2rem; margin-bottom:1.2rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); }
+
+        /* Certifications grid */
+        .cert-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:1rem; }
+
+        /* Contact */
+        .contact-form { max-width:800px; margin:1.5rem auto 0; background:var(--card); padding:1.2rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); }
+
+        /* Footer */
+        .footer { text-align:center; padding:2rem 1rem; color:var(--text-dim); font-family:'JetBrains Mono'; border-top:1px solid rgba(0,217,255,0.04); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-name { font-size:2.2rem; }
+            .section-title { font-size:1.6rem; }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo"><i class="fas fa-terminal"></i> SHUBHAM<span style="color:var(--accent)">.</span>KS</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#summary" class="nav-link">Summary</a></li>
+                <li><a href="#portfolio" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <p class="hero-greeting">DEVSECOPS & CLOUD ENGINEER</p>
+            <h1 class="hero-name">SHUBHAM K. SAWANT</h1>
+            <h2 class="hero-title">Automating secure, scalable cloud infrastructure | AWS & Azure</h2>
+
+            <div class="terminal-line">
+                DevSecOps & Cloud Engineer with 8+ years of experience in automating, scaling, and securing infrastructure across AWS and Azure. Specialized in Terraform, AWS CDK, Kubernetes, and CI/CD with Jenkins, GitHub Actions, and Azure DevOps. Passionate about AI-driven DevOps automation and infrastructure efficiency.
+            </div>
+
+            <div class="hero-cta">
+                <a href="#portfolio" class="btn btn-primary"><i class="fas fa-rocket"></i>&nbsp;View Projects</a>
+                <a href="#contact" class="btn btn-secondary"><i class="fas fa-envelope"></i>&nbsp;Contact</a>
+                <a href="https://www.linkedin.com/in/shubhamksawant" target="_blank" class="btn btn-secondary"><i class="fab fa-linkedin"></i>&nbsp;LinkedIn</a>
+            </div>
+
+            <div class="hero-social" style="margin-top:1rem;">
+                <a href="https://github.com/shubhamksawant" target="_blank" class="btn btn-secondary" style="padding:0.7rem 0.9rem;"><i class="fab fa-github"></i></a>
+                <a href="https://shubhamksawant.medium.com" target="_blank" class="btn btn-secondary" style="padding:0.7rem 0.9rem;"><i class="fab fa-medium"></i></a>
+                <a href="https://topmate.io/shubhamksawant" target="_blank" class="btn btn-secondary" style="padding:0.7rem 0.9rem;"><i class="fas fa-user-clock"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats / Highlights -->
+    <section class="stats-section">
+        <div class="container">
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+                <div style="background:var(--card); padding:1rem 1.2rem; border-radius:8px; border:2px solid rgba(0,217,255,0.06); text-align:center; min-width:160px;">
+                    <div style="font-family:'Orbitron'; font-size:1.6rem; color:var(--primary); font-weight:900;">8+</div>
+                    <div style="font-family:'JetBrains Mono'; color:var(--text-dim); margin-top:6px;">Years Experience</div>
+                </div>
+                <div style="background:var(--card); padding:1rem 1.2rem; border-radius:8px; border:2px solid rgba(0,217,255,0.06); text-align:center; min-width:160px;">
+                    <div style="font-family:'Orbitron'; font-size:1.6rem; color:var(--primary); font-weight:900;">25+</div>
+                    <div style="font-family:'JetBrains Mono'; color:var(--text-dim); margin-top:6px;">CI/CD Pipelines</div>
+                </div>
+                <div style="background:var(--card); padding:1rem 1.2rem; border-radius:8px; border:2px solid rgba(0,217,255,0.06); text-align:center; min-width:160px;">
+                    <div style="font-family:'Orbitron'; font-size:1.6rem; color:var(--primary); font-weight:900;">30+</div>
+                    <div style="font-family:'JetBrains Mono'; color:var(--text-dim); margin-top:6px;">AWS Services</div>
+                </div>
+                <div style="background:var(--card); padding:1rem 1.2rem; border-radius:8px; border:2px solid rgba(0,217,255,0.06); text-align:center; min-width:160px;">
+                    <div style="font-family:'Orbitron'; font-size:1.6rem; color:var(--primary); font-weight:900;">13+</div>
+                    <div style="font-family:'JetBrains Mono'; color:var(--text-dim); margin-top:6px;">Engineers Mentored</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summary -->
+    <section id="summary">
+        <div class="container">
+            <div class="section-header" style="text-align:center; margin-bottom:1.5rem;">
+                <h2 class="section-title"><i class="fas fa-user-tie"></i> PROFESSIONAL SUMMARY</h2>
+                <p class="section-subtitle">DevSecOps leader focused on automation, security, and resilient cloud platforms.</p>
+            </div>
+
+            <div style="background:var(--card); padding:1.2rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); max-width:1000px; margin:0 auto;">
+                <p style="color:var(--text); font-size:1rem; line-height:1.8;">
+                    DevSecOps & Cloud Engineer with 8+ years of project-driven experience automating, scaling, and securing infrastructure across <strong>AWS</strong> and <strong>Azure</strong>. Expert in <strong>Infrastructure as Code</strong> (Terraform, AWS CDK, CloudFormation), CI/CD (GitHub Actions, Jenkins, Azure DevOps, CodePipeline), container orchestration (EKS), and AI-based automation using AWS Bedrock & SageMaker. Proven track record building DevOps strategies from scratch, standardizing IaC, implementing GitOps deployments, and improving operational efficiency through unified pipelines and automation.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Projects -->
+    <section id="portfolio">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:2rem;">
+                <h2 class="section-title"><i class="fas fa-code"></i> PROJECTS</h2>
+                <p class="section-subtitle">Selected project highlights — DevSecOps, Cloud Automation, AI & IaC</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <!-- Fusion -->
+                <div class="project-card">
+                    <div class="project-title"><i class="fas fa-shield-alt"></i> Fusion – Cybersecurity Threat Analysis Platform</div>
+                    <p class="project-description" style="color:var(--text-dim); margin:0.5rem 0 1rem 0;">
+                        Architected and deployed a multi-account AWS environment for a large-scale threat analysis platform using AWS CDK and CodePipeline. Built DevOps strategy from scratch, implemented IaC and DR (warm-standby) with RTO &lt; 15 mins and RPO &lt; 5 mins. Integrated GenAI chatbot and RAG workflows using AWS Bedrock and SageMaker.
+                    </p>
+                    <div>
+                        <span class="tag">AWS CDK</span>
+                        <span class="tag">CodePipeline</span>
+                        <span class="tag">Bedrock</span>
+                        <span class="tag">SageMaker</span>
+                    </div>
+                </div>
+
+                <!-- SailPoint -->
+                <div class="project-card">
+                    <div class="project-title"><i class="fas fa-user-shield"></i> Identity Management System (SailPoint)</div>
+                    <p class="project-description" style="color:var(--text-dim); margin:0.5rem 0 1rem 0;">
+                        Automated three-tier SailPoint deployment using Terraform and GitHub Actions, cutting manual configuration effort by 50%. Designed custom auto-scaling for EC2 task servers (-35% compute cost) and implemented versioned Terraform modules with automated rollback and zero-downtime CI/CD workflows.
+                    </p>
+                    <div>
+                        <span class="tag">Terraform</span>
+                        <span class="tag">GitHub Actions</span>
+                        <span class="tag">Auto-scaling</span>
+                    </div>
+                </div>
+
+                <!-- Data Marketplace -->
+                <div class="project-card">
+                    <div class="project-title"><i class="fas fa-database"></i> Data Marketplace Platform</div>
+                    <p class="project-description" style="color:var(--text-dim); margin:0.5rem 0 1rem 0;">
+                        Designed the complete DevOps strategy and unified CI/CD pipeline using Azure DevOps + AWS Pipelines, consolidating 15 pipelines into a single workflow and reducing microservice deployment time by 60%. Automated provisioning via CloudFormation and integrated RAG chatbot automation using Bedrock, Step Functions, and SageMaker.
+                    </p>
+                    <div>
+                        <span class="tag">Azure DevOps</span>
+                        <span class="tag">CloudFormation</span>
+                        <span class="tag">Bedrock</span>
+                    </div>
+                </div>
+
+                <!-- NewsCorp -->
+                <div class="project-card">
+                    <div class="project-title"><i class="fas fa-newspaper"></i> NewsCorp – Media Compliance Automation</div>
+                    <p class="project-description" style="color:var(--text-dim); margin:0.5rem 0 1rem 0;">
+                        Remediated 4,600+ AWS resources to meet SCP compliance, and migrated 368 Bamboo pipelines to GitHub Actions, reducing pipeline maintenance complexity by 55% and standardizing CI/CD templates across teams.
+                    </p>
+                    <div>
+                        <span class="tag">GitHub Actions</span>
+                        <span class="tag">SCP</span>
+                        <span class="tag">AWS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <h2 class="section-title"><i class="fas fa-tools"></i> TECH STACK</h2>
+                <p class="section-subtitle">Cloud, IaC, CI/CD, Containers, Security and more</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Cloud Platforms</h3>
+                    <div class="skill-name">AWS (EC2, Lambda, S3, RDS, VPC, CloudWatch)</div>
+                    <div class="skill-name">Azure (Azure DevOps, Repos, Pipelines)</div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Infrastructure as Code</h3>
+                    <div class="skill-name">Terraform (modules & state management)</div>
+                    <div class="skill-name">AWS CDK & CloudFormation</div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">CI/CD & GitOps</h3>
+                    <div class="skill-name">GitHub Actions, Jenkins, CodePipeline, Azure DevOps</div>
+                    <div class="skill-name">ArgoCD (GitOps) & Helm</div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Containers & Orchestration</h3>
+                    <div class="skill-name">Docker, ECR, ECS, Kubernetes (EKS), Karpenter</div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Security & Observability</h3>
+                    <div class="skill-name">IAM, KMS, Secrets Manager, Security Hub</div>
+                    <div class="skill-name">Prometheus, Grafana, CloudWatch, OpenSearch</div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">Scripting & Tools</h3>
+                    <div class="skill-name">Bash, Python, Ansible</div>
+                    <div class="skill-name">SonarQube, Trivy, Checkov, tfsec</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience / Timeline -->
+    <section id="experience">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <h2 class="section-title"><i class="fas fa-briefcase"></i> EXPERIENCE</h2>
+                <p class="section-subtitle">Career history and roles</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3 style="color:var(--primary); font-family:'Orbitron';">Senior Associate — DevSecOps (PwC India)</h3>
+                    <div style="color:var(--text-dim); font-family:'JetBrains Mono'; margin:6px 0;">Dec 2022 – Present | Pune, Maharashtra, India</div>
+                    <ul style="color:var(--text-dim); margin-top:8px;">
+                        <li>Lead DevSecOps initiatives for enterprise clients, architecting multi-account AWS environments and CI/CD automation.</li>
+                        <li>Built IaC modules (Terraform, CDK), unified pipelines, and implemented DR and security automation.</li>
+                        <li>Integrated AI-driven features (Bedrock & SageMaker) into production workflows for monitoring & analytics.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3 style="color:var(--primary); font-family:'Orbitron';">Technical Engineer — Pentagon Systems & Services</h3>
+                    <div style="color:var(--text-dim); font-family:'JetBrains Mono'; margin:6px 0;">Feb 2020 – Nov 2022 | Mumbai Area, India</div>
+                    <ul style="color:var(--text-dim); margin-top:8px;">
+                        <li>Worked on cloud automation, CI/CD pipelines and support for enterprise applications.</li>
+                        <li>Deployed applications using Terraform, CloudFormation and CI tools; automated operational tasks via scripts.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3 style="color:var(--primary); font-family:'Orbitron';">Technical Support Engineer — Rahi Systems</h3>
+                    <div style="color:var(--text-dim); font-family:'JetBrains Mono'; margin:6px 0;">2017 – 2019 | Bengaluru / Pune, India</div>
+                    <ul style="color:var(--text-dim); margin-top:8px;">
+                        <li>Provided system and application support, troubleshooting infrastructure and networking issues.</li>
+                        <li>Gained foundational system administration and scripting experience.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section id="certifications">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:1.5rem;">
+                <h2 class="section-title"><i class="fas fa-certificate"></i> CERTIFICATIONS</h2>
+                <p class="section-subtitle">Professional credentials</p>
+            </div>
+
+            <div class="cert-grid">
+                <div class="skill-category cert-card">
+                    <div style="font-size:1.1rem; font-weight:800; color:var(--primary);">AWS Certified DevOps Engineer – Professional</div>
+                    <div style="color:var(--text-dim); margin-top:8px;">Amazon Web Services</div>
+                </div>
+                <div class="skill-category cert-card">
+                    <div style="font-size:1.1rem; font-weight:800; color:var(--primary);">AWS Certified Solutions Architect – Associate</div>
+                    <div style="color:var(--text-dim); margin-top:8px;">Amazon Web Services</div>
+                </div>
+                <div class="skill-category cert-card">
+                    <div style="font-size:1.1rem; font-weight:800; color:var(--primary);">HashiCorp Certified: Terraform Associate</div>
+                    <div style="color:var(--text-dim); margin-top:8px;">HashiCorp</div>
+                </div>
+                <div class="skill-category cert-card">
+                    <div style="font-size:1.1rem; font-weight:800; color:var(--primary);">GitOps Fundamentals (Codefresh)</div>
+                    <div style="color:var(--text-dim); margin-top:8px;">Codefresh</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:1rem;">
+                <h2 class="section-title"><i class="fas fa-trophy"></i> ACHIEVEMENTS</h2>
+            </div>
+
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+                <div style="background:var(--card); padding:1rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); min-width:220px; text-align:left;">
+                    <div style="font-weight:800; color:var(--primary);">STAR&R Awards</div>
+                    <div style="color:var(--text-dim); margin-top:6px;">Awarded twice for outstanding DevOps performance and delivery excellence.</div>
+                </div>
+                <div style="background:var(--card); padding:1rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); min-width:220px; text-align:left;">
+                    <div style="font-weight:800; color:var(--primary);">Client Appreciation</div>
+                    <div style="color:var(--text-dim); margin-top:6px;">Received 2 client appreciations for successful project deliveries and technical leadership.</div>
+                </div>
+                <div style="background:var(--card); padding:1rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); min-width:220px; text-align:left;">
+                    <div style="font-weight:800; color:var(--primary);">KodeKloud Rank</div>
+                    <div style="color:var(--text-dim); margin-top:6px;">Ranked #2 DevOps Architect on KodeKloud Engineer platform.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div style="text-align:center; margin-bottom:1rem;">
+                <h2 class="section-title"><i class="fas fa-envelope"></i> CONTACT</h2>
+                <p class="section-subtitle">Open to DevSecOps / Platform / SRE roles. Available for remote & relocation opportunities.</p>
+            </div>
+
+            <div style="display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;">
+                <div style="background:var(--card); padding:1rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); min-width:280px; text-align:left;">
+                    <div style="font-weight:800; color:var(--primary);">Email</div>
+                    <div style="color:var(--text-dim); margin-top:6px;"><a href="mailto:shubhamksawant3@gmail.com" style="color:var(--text); text-decoration:none;">shubhamksawant3@gmail.com</a></div>
+                </div>
+
+                <div style="background:var(--card); padding:1rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); min-width:280px; text-align:left;">
+                    <div style="font-weight:800; color:var(--primary);">GitHub</div>
+                    <div style="color:var(--text-dim); margin-top:6px;"><a href="https://github.com/shubhamksawant" target="_blank" style="color:var(--text); text-decoration:none;">github.com/shubhamksawant</a></div>
+                </div>
+
+                <div style="background:var(--card); padding:1rem; border-radius:10px; border:2px solid rgba(0,217,255,0.06); min-width:280px; text-align:left;">
+                    <div style="font-weight:800; color:var(--primary);">LinkedIn</div>
+                    <div style="color:var(--text-dim); margin-top:6px;"><a href="https://linkedin.com/in/shubhamksawant" target="_blank" style="color:var(--text); text-decoration:none;">linkedin.com/in/shubhamksawant</a></div>
+                </div>
+            </div>
+
+            <!-- Contact form (non-functional placeholder) -->
+            <div class="contact-form" style="margin-top:1.5rem;">
+                <form onsubmit="alert('Thanks — please email me at shubhamksawant3@gmail.com'); return false;">
+                    <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                        <input type="text" placeholder="Your name" style="flex:1; padding:0.75rem; border-radius:6px; border:1px solid rgba(0,217,255,0.06); background:transparent; color:var(--text);" required>
+                        <input type="email" placeholder="Email" style="flex:1; padding:0.75rem; border-radius:6px; border:1px solid rgba(0,217,255,0.06); background:transparent; color:var(--text);" required>
+                    </div>
+                    <textarea placeholder="Message" style="width:100%; margin-top:0.75rem; padding:0.75rem; border-radius:6px; border:1px solid rgba(0,217,255,0.06); background:transparent; color:var(--text);" required></textarea>
+                    <div style="text-align:right; margin-top:0.75rem;">
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div style="max-width:1100px; margin:0 auto; padding:1rem;">
+            <div style="margin-bottom:8px;">&copy; <span id="year"></span> Shubham K. Sawant. All rights reserved.</div>
+            <div style="color:var(--text-dim); font-family:'JetBrains Mono';">Built with automation & DevSecOps ❤️</div>
+        </div>
+    </footer>
+
+    <script>
+        // small helpers: set year
+        document.getElementById('year').innerText = new Date().getFullYear();
+
+        // Smooth anchor scrolling (already enabled via CSS, but this is to ensure)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const el = document.querySelector(this.getAttribute('href'));
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Basic reveal animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.project-card, .skill-category, .timeline-item, .cert-card, .contact-form').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Navbar shrink on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.navbar');
+            if (window.scrollY > 50) nav.style.backdropFilter = 'blur(10px)';
+            else nav.style.backdropFilter = 'blur(20px)';
+        });
+
+    </script>
+</body>
+</html>
